@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Hello Vue! cvdvd</h1>
     <v-main-wrapper></v-main-wrapper>
   </div>
 </template>
