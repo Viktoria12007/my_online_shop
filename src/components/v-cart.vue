@@ -1,26 +1,49 @@
 <template>
 <div class="v-cart">
-   <h3>{{title}}</h3>
-   <p>Text for Item</p>
-   <button>Add goods</button>
+    <h2>Cart</h2>
+    <v-cart-item 
+    v-for="(item, index) in cart_data"
+    :key="item.article"
+    :cart_item_data="item"
+    @deleteFromCart="deleteFromCart(index)"
+    />
 </div>
 </template>
 
 <script>
+import vCartItem from './v-cart-item.vue';
+import {mapActions} from 'vuex';
+
 export default {
    name: 'v-cart',
-   components: {},
-   props: {},
+   components: {
+       vCartItem
+   },
+   props: {
+       cart_data: {
+           type: Array,
+           default() {
+             return []
+           }
+       }
+   },
    data() {
        return {
-           title: 'v-cart',
+          
        }
    },
    computed: {},
-   metods: {},
+   methods: {
+       ...mapActions([
+           'DELETE_FROM_CART'
+       ]),
+       deleteFromCart(index) {
+          this.DELETE_FROM_CART(index);
+       }
+   },
    watch: {},
    mounted() {
-       console.log('Hello world!')
+       
    }
 }
 </script>
@@ -29,9 +52,5 @@ export default {
 .v-cart {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center;
-    max-width: 900px;
-    margin: 0 auto; */
 }
 </style>
