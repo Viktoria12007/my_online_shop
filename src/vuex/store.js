@@ -19,10 +19,7 @@ const store = createStore({
             item.quantity++;
           }
         })
-        if(!isProductExist) {
-            state.cart.push(product);
-            state.cart[state.cart.length-1].quantity = 1;
-        }
+        isProductExist || state.cart.push({ ...product, quantity: 1 })
       },
       REMOVE_FROM_CART: (state, index) => {
          state.cart.splice(index, 1);
